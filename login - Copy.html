@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta http-equiv="pragma" content="no-cache">
+  <meta http-equiv="expires" content="-1">
+  <title>الحصن - تسجيل الدخول للشبكة</title>
+  <link rel="stylesheet" href="fonts/cairo.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- MOBILE VIEW (Screens 1, 2, 3) -->
+  <div class="app-container d-mobile-only">
+    
+    <!-- Top Mobile Hero Banner -->
+    <div class="mobile-hero-banner">
+      <img src="img/hero-mobile.jpg" alt="الحصن Dessert & Coffee">
+    </div>
+
+    <!-- Overlapping Sheet -->
+    <div class="content-sheet">
+
+      <!-- Status Pill -->
+      <div class="top-status-pill">
+        <span class="live-clock-text" data-status="CONNECTED">10:45 AM • OCTOBER 24 • CONNECTED</span>
+        <svg viewBox="0 0 24 24">
+          <path d="M5 12.55a11 11 0 0 1 14.08 0"></path>
+          <path d="M1.42 9a16 16 0 0 1 21.16 0"></path>
+          <path d="M8.53 16.11a6 6 0 0 1 6.95 0"></path>
+          <line x1="12" y1="20" x2="12.01" y2="20"></line>
+        </svg>
+      </div>
+
+      <!-- Brand Logo & Welcome -->
+      <div class="brand-header" style="margin-top: 18px;">
+        <div id="siteBrandWrapMobile">
+          <img src="img/logo-horizontal.png" alt="الحصن" class="logo-img" id="siteLogoMobile">
+        </div>
+        <div class="welcome-desc" id="siteWelcomeMobile">تفضل بتسجيل الدخول للوصول إلى شبكتنا الخاصة.</div>
+      </div>
+
+      <!-- MikroTik Error Message -->
+      $(if error)
+      <div class="alert-error">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10"></circle>
+          <line x1="12" y1="8" x2="12" y2="12"></line>
+          <line x1="12" y1="16" x2="12.01" y2="16"></line>
+        </svg>
+        <span>$(error)</span>
+      </div>
+      $(endif)
+
+      <!-- Login Form (MikroTik Standard Form) -->
+      <form name="login" id="loginForm" action="$(link-login-only)" method="post" class="login-form">
+        <input type="hidden" name="dst" value="$(link-orig)">
+        <input type="hidden" name="popup" value="true">
+
+        <!-- Username Input (Card Number) -->
+        <div class="input-group">
+          <input type="text" name="username" id="username" placeholder="رقم البطاقة" value="$(username)" autocomplete="off" required>
+          <div class="input-icon">
+            <svg viewBox="0 0 24 24">
+              <rect x="2" y="4" width="20" height="16" rx="2"></rect>
+              <line x1="2" y1="10" x2="22" y2="10"></line>
+            </svg>
+          </div>
+        </div>
+
+        <!-- Password Input (Hidden automatically in Username Only Mode) -->
+        <div class="input-group" id="passwordGroup">
+          <input type="password" name="password" id="password" placeholder="كلمة المرور" autocomplete="off">
+          <div class="input-icon">
+            <svg viewBox="0 0 24 24">
+              <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+              <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+            </svg>
+          </div>
+        </div>
+
+        <!-- Login Button -->
+        <button type="submit" class="btn-primary" id="loginSubmitBtn">
+          <span>تسجيل الدخول للشبكة</span>
+          <span>←</span>
+        </button>
+
+        <!-- Optional Free Trial Internet Button -->
+        $(if trial == 'yes')
+        <a href="$(link-login-only)?dst=$(link-orig-esc)&amp;username=T-$(mac-esc)" class="btn-trial" id="trialBtn" style="display:none;">
+          <span>تجربة إنترنت مجاني</span>
+          <span>←</span>
+        </a>
+        $(endif)
+      </form>
+
+      <!-- Diamond Divider -->
+      <div class="diamond-divider">
+        <div class="diamond"></div>
+      </div>
+
+      <!-- Menu Preview Card -->
+      <a href="menu.html" class="menu-preview-card" id="menuPreviewCard">
+        <div class="card-content">
+          <div class="card-title" id="menuCardTitle">قائمتنا المختارة</div>
+          <div class="card-desc" id="menuCardDesc">
+            "تصفح قائمتنا لاكتشاف متعة المذاق؛ حيث تلتقي روعة المشروبات الساخنة والباردة مع ألذ أصناف الحلويات الفاخرة."
+          </div>
+          <div class="card-link">
+            <span>استكشف</span>
+            <span>←</span>
+          </div>
+        </div>
+        <div class="thumb-wrapper">
+          <img src="img/menu-thumb.jpg" alt="Menu Preview">
+        </div>
+      </a>
+
+      <!-- Footer -->
+      <footer class="site-footer">
+        <img src="img/logo-horizontal.png" alt="الحصن" class="footer-logo">
+        <div class="footer-tagline">COFFEE • SWEETS • WIFI</div>
+        <div class="footer-copy" id="footerCopyMobile">جميع الحقوق محفوظة</div>
+        <div class="footer-info">
+          <div class="footer-info-item">
+            <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+            <span id="footerAddressMobile">الرمال - شارع الشهداء - بالقرب من باندا مول</span>
+          </div>
+          <div class="footer-info-item">
+            <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+            <span id="footerPhoneMobile">+970 59 000 0000</span>
+          </div>
+        </div>
+
+        <!-- Developer / Network Branding Logos -->
+        <div class="footer-brand-logos">
+          <img src="img/logo2.png" alt="Connect" class="brand-logo-connect">
+          <img src="img/logo.png" alt="كمبيوتر فريندس" class="brand-logo-banner">
+        </div>
+      </footer>
+
+    </div>
+  </div>
+
+
+  <!-- DESKTOP SPLIT VIEW (Screen 11) -->
+  <div class="desktop-split-wrapper d-desktop-only">
+    
+    <!-- Left Hero Photo Card -->
+    <div class="desktop-hero-side">
+      <img src="img/hero-desktop.jpg" alt="الحصن Luxury Table">
+    </div>
+
+    <!-- Right Side Content -->
+    <div class="desktop-content-side">
+      
+      <!-- Top Pill -->
+      <div style="text-align: center; margin-bottom: 20px;">
+        <div class="top-status-pill">
+          <span class="live-clock-text" data-status="CONNECTED">10:45 AM • OCTOBER 24 • CONNECTED</span>
+          <svg viewBox="0 0 24 24">
+            <path d="M5 12.55a11 11 0 0 1 14.08 0"></path>
+            <path d="M1.42 9a16 16 0 0 1 21.16 0"></path>
+            <path d="M8.53 16.11a6 6 0 0 1 6.95 0"></path>
+            <line x1="12" y1="20" x2="12.01" y2="20"></line>
+          </svg>
+        </div>
+      </div>
+
+      <!-- Brand Logo -->
+      <div class="brand-header">
+        <div id="siteBrandWrapDesktop">
+          <img src="img/logo-horizontal.png" alt="الحصن" class="logo-img" id="siteLogoDesktop">
+        </div>
+        <div class="welcome-desc" id="siteWelcomeDesktop">تفضل بتسجيل الدخول للوصول إلى شبكتنا الخاصة.</div>
+      </div>
+
+      <!-- MikroTik Error Message -->
+      $(if error)
+      <div class="alert-error">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10"></circle>
+          <line x1="12" y1="8" x2="12" y2="12"></line>
+          <line x1="12" y1="16" x2="12.01" y2="16"></line>
+        </svg>
+        <span>$(error)</span>
+      </div>
+      $(endif)
+
+      <!-- Desktop Two-Column Arrangement: Menu Card on Right, Form on Left -->
+      <div class="desktop-form-row">
+        
+        <!-- Menu Card Side -->
+        <div class="desktop-form-col">
+          <a href="menu.html" class="menu-preview-card" style="height: 100%;">
+            <div class="card-content">
+              <div class="card-title">قائمتنا المختارة</div>
+              <div class="card-desc">
+                "تصفح قائمتنا لاكتشاف متعة المذاق؛ حيث تلتقي روعة المشروبات الساخنة والباردة مع ألذ أصناف الحلويات الفاخرة."
+              </div>
+              <div class="card-link">
+                <span>استكشف</span>
+                <span>←</span>
+              </div>
+            </div>
+            <div class="thumb-wrapper">
+              <img src="img/menu-thumb.jpg" alt="Menu Preview">
+            </div>
+          </a>
+        </div>
+
+        <!-- Login Form Side -->
+        <div class="desktop-form-col">
+          <form action="$(link-login-only)" method="post" class="login-form" style="margin-bottom: 0;">
+            <input type="hidden" name="dst" value="$(link-orig)">
+            <input type="hidden" name="popup" value="true">
+
+            <div class="input-group">
+              <input type="text" name="username" placeholder="رقم البطاقة" value="$(username)" autocomplete="off" required>
+              <div class="input-icon">
+                <svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"></rect><line x1="2" y1="10" x2="22" y2="10"></line></svg>
+              </div>
+            </div>
+
+            <div class="input-group" style="display:none;">
+              <input type="password" name="password" placeholder="كلمة المرور" autocomplete="off">
+              <div class="input-icon">
+                <svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+              </div>
+            </div>
+
+            <button type="submit" class="btn-primary">
+              <span>تسجيل الدخول للشبكة</span>
+              <span>←</span>
+            </button>
+          </form>
+        </div>
+
+      </div>
+
+      <!-- Diamond Divider -->
+      <div class="diamond-divider">
+        <div class="diamond"></div>
+      </div>
+
+      <!-- Desktop Footer -->
+      <footer class="site-footer" style="margin-top: 10px;">
+        <img src="img/logo-horizontal.png" alt="الحصن" class="footer-logo" style="max-width: 150px;">
+        <div class="footer-tagline">COFFEE • SWEETS • WIFI</div>
+        <div class="footer-copy">جميع الحقوق محفوظة</div>
+        <div class="footer-info" style="flex-direction: row; gap: 20px; justify-content: center;">
+          <div class="footer-info-item">
+            <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+            <span id="footerAddressDesktop" class="cfg-address">الرمال - شارع الشهداء - بالقرب من باندا مول</span>
+          </div>
+          <div class="footer-info-item">
+            <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+            <span id="footerPhoneDesktop" class="cfg-phone">+970 59 000 0000</span>
+          </div>
+        </div>
+
+        <!-- Developer / Network Branding Logos -->
+        <div class="footer-brand-logos">
+          <img src="img/logo2.png" alt="Connect" class="brand-logo-connect">
+          <img src="img/logo.png" alt="كمبيوتر فريندس" class="brand-logo-banner">
+        </div>
+      </footer>
+
+    </div>
+
+  </div>
+
+  <style>
+    /* Responsive View Switcher */
+    @media (max-width: 991px) {
+      .d-desktop-only { display: none !important; }
+      .d-mobile-only { display: flex !important; }
+    }
+    @media (min-width: 992px) {
+      .d-mobile-only { display: none !important; }
+      .d-desktop-only { display: flex !important; }
+    }
+  </style>
+
+  <script src="config.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

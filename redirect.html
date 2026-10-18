@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Redirecting...</title>
+  <meta http-equiv="refresh" content="0; url=$(link-redirect)">
+  <meta http-equiv="pragma" content="no-cache">
+  <meta http-equiv="expires" content="-1">
+</head>
+<body>
+  $(if redir)
+  <script>
+    window.location.href = '$(link-redirect)';
+  </script>
+  $(else)
+  <script>
+    window.location.href = '$(link-login-only)';
+  </script>
+  $(endif)
+</body>
+</html>

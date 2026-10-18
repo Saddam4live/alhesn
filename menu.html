@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>الحصن - قائمة الطعام والمشروبات</title>
+  <link rel="stylesheet" href="fonts/cairo.css">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .cat-nav-pills {
+      display: flex;
+      gap: 10px;
+      overflow-x: auto;
+      padding: 10px 0 20px;
+      margin-bottom: 15px;
+      scrollbar-width: none;
+    }
+    .cat-nav-pills::-webkit-scrollbar { display: none; }
+    .cat-nav-pill {
+      white-space: nowrap;
+      padding: 8px 18px;
+      border-radius: var(--radius-full);
+      background: #ffffff;
+      border: 1.5px solid var(--border-light);
+      font-weight: 700;
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .cat-nav-pill.active {
+      background: var(--primary-gradient);
+      color: #ffffff;
+      border-color: transparent;
+      box-shadow: 0 4px 12px rgba(135, 75, 19, 0.25);
+    }
+    .back-nav-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+    .btn-back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: var(--primary-color);
+      background: #ffffff;
+      padding: 6px 16px;
+      border-radius: var(--radius-full);
+      border: 1px solid var(--border-light);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Floating Scroll-To-Top Button (Screens 8, 9, 10, 16, 17) -->
+  <button type="button" class="fab-btn" id="scrollTopBtn" title="للأعلى">
+    <svg viewBox="0 0 24 24"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="5 12 12 5 19 12"></polyline></svg>
+  </button>
+
+  <div class="menu-page-wrapper" style="width: 100%; max-width: 1100px; margin: 0 auto; min-height: 100vh; display: flex; flex-direction: column;">
+    
+    <!-- Top Header Bar with Live Clock -->
+    <div style="padding: 16px 20px 0; text-align: center;">
+      <div class="top-status-pill">
+        <span class="live-clock-text" data-status="الحصن">2:45 PM • APR 19 • الحصن</span>
+      </div>
+    </div>
+
+    <!-- Curved Dark Honey Header (Screens 7 and 15) -->
+    <header class="menu-header-curved" style="border-radius: 0 0 36px 36px; margin-top: 12px;">
+      <div class="menu-header-logo-badge">
+        <img src="img/logo-badge.png" alt="الحصن">
+      </div>
+      <h1 class="menu-main-title">قائمة الطعام والمشروبات</h1>
+      <div class="menu-sub-title-cursive">Menu Complet</div>
+    </header>
+
+    <!-- Content Area -->
+    <main style="padding: 24px 20px 40px; flex: 1;">
+      
+      <!-- VIEW 1: Categories Overview (Screens 7 & 15) -->
+      <section id="categoriesView" style="display: block;">
+        <div class="category-select-header">اختر القسم</div>
+        
+        <!-- Mobile/Desktop Category Cards Container -->
+        <div id="categoryCardsContainer" class="desktop-categories-grid">
+          <!-- Populated by JavaScript from config.js -->
+        </div>
+
+        <div style="text-align: center; margin-top: 30px;">
+          <a href="login.html" class="btn-secondary" style="max-width: 280px; margin: 0 auto;">
+            <span>العودة لصفحة تسجيل الدخول</span>
+            <span>←</span>
+          </a>
+        </div>
+      </section>
+
+      <!-- VIEW 2: Detailed Items View (Screens 8, 9, 10, 16, 17) -->
+      <section id="itemsView" style="display: none;">
+        
+        <!-- Navigation bar -->
+        <div class="back-nav-bar">
+          <button type="button" class="btn-back-link" id="btnBackToOverview">
+            <span>→</span>
+            <span>الأقسام الرئيسية</span>
+          </button>
+          <a href="login.html" class="btn-back-link">
+            <span>تسجيل الدخول للشبكة</span>
+            <span>←</span>
+          </a>
+        </div>
+
+        <!-- Category Switching Pills -->
+        <div class="cat-nav-pills" id="catNavPills"></div>
+
+        <!-- Big Section Header -->
+        <div style="text-align: center; margin-bottom: 24px;">
+          <h2 id="activeCatTitle" style="font-size: 1.8rem; font-weight: 800; color: var(--text-main); margin-bottom: 6px;">
+            المشروبات الساخنة
+          </h2>
+          <div class="diamond-divider" style="margin: 10px auto; max-width: 200px;">
+            <div class="diamond"></div>
+          </div>
+        </div>
+
+        <!-- Items Container (Desktop 2-column or Mobile stacked) -->
+        <div id="menuItemsContainer" class="desktop-menu-grid">
+          <!-- Populated by JavaScript from config.js -->
+        </div>
+
+      </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer" style="padding: 20px; border-top: 1px solid var(--border-light); margin-top: auto;">
+      <img src="img/logo-horizontal.png" alt="الحصن" class="footer-logo">
+      <div class="footer-tagline">• الحصن • COFFEE & MORE •</div>
+      <div class="footer-copy">جميع الحقوق محفوظة</div>
+      <div class="footer-info">
+        <div class="footer-info-item">
+          <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+          <span id="footerAddressMenu" class="cfg-address">الرمال - شارع الشهداء - بالقرب من باندا مول</span>
+        </div>
+        <div class="footer-info-item">
+          <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+          <span id="footerPhoneMenu" class="cfg-phone">+970 59 000 0000</span>
+        </div>
+      </div>
+
+      <!-- Developer / Network Branding Logos -->
+      <div class="footer-brand-logos">
+        <img src="img/logo2.png" alt="Connect" class="brand-logo-connect">
+        <img src="img/logo.png" alt="كمبيوتر فريندس" class="brand-logo-banner">
+      </div>
+    </footer>
+
+  </div>
+
+  <script src="config.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    // Handle switching between overview and items view
+    document.addEventListener('DOMContentLoaded', function() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const catParam = urlParams.get('cat');
+      const catView = document.getElementById('categoriesView');
+      const itemsView = document.getElementById('itemsView');
+      const btnBack = document.getElementById('btnBackToOverview');
+      const pillsContainer = document.getElementById('catNavPills');
+
+      const cfg = window.HotspotConfig || {};
+      const categories = cfg.categories || [];
+
+      function renderPills(selectedId) {
+        if (!pillsContainer) return;
+        pillsContainer.innerHTML = '';
+        categories.forEach(cat => {
+          const pill = document.createElement('button');
+          pill.className = `cat-nav-pill ${cat.id === selectedId ? 'active' : ''}`;
+          pill.textContent = cat.title;
+          pill.onclick = () => {
+            const url = new URL(window.location);
+            url.searchParams.set('cat', cat.id);
+            window.history.pushState({}, '', url);
+            window.showCategory(cat.id);
+          };
+          pillsContainer.appendChild(pill);
+        });
+      }
+
+      window.showCategory = function(catId) {
+        catView.style.display = 'none';
+        itemsView.style.display = 'block';
+        renderPills(catId);
+
+        // Render category items
+        const activeCategory = categories.find(c => c.id === catId) || categories[0];
+        if (activeCategory) {
+          document.getElementById('activeCatTitle').textContent = activeCategory.title;
+          const itemsContainer = document.getElementById('menuItemsContainer');
+          itemsContainer.innerHTML = '';
+          const currency = cfg.currency || 'ريال';
+
+          (activeCategory.sections || []).forEach(sec => {
+            const secBox = document.createElement('div');
+            secBox.className = 'menu-section-container';
+
+            let itemsHtml = '';
+            (sec.items || []).forEach(item => {
+              const priceDisplay = formatPrice(item.price, currency);
+              itemsHtml += `
+                <div class="menu-item-row">
+                  <div class="menu-item-info">
+                    <div class="menu-item-name">${item.name}</div>
+                    ${item.note ? `<div class="menu-item-note">${item.note}</div>` : ''}
+                  </div>
+                  <div class="menu-item-price">${priceDisplay}</div>
+                </div>
+              `;
+            });
+
+            secBox.innerHTML = `
+              <div class="menu-section-heading">
+                <span>${sec.title}</span>
+                <div class="diamond"></div>
+              </div>
+              <div class="menu-items-list">
+                ${itemsHtml}
+              </div>
+            `;
+            itemsContainer.appendChild(secBox);
+          });
+        }
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      };
+
+      if (catParam) {
+        window.showCategory(catParam);
+      } else {
+        catView.style.display = 'block';
+        itemsView.style.display = 'none';
+      }
+
+      if (btnBack) {
+        btnBack.onclick = function() {
+          const url = new URL(window.location);
+          url.searchParams.delete('cat');
+          window.history.pushState({}, '', url);
+          catView.style.display = 'block';
+          itemsView.style.display = 'none';
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        };
+      }
+    });
+  </script>
+</body>
+</html>

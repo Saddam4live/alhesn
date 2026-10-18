@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>لوحة تحكم الحصن والمنيو</title>
+  <link rel="stylesheet" href="fonts/cairo.css">
+  <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+
+  <!-- Hidden File Input for Import -->
+  <input type="file" id="fileInput" accept=".js,.json" style="display: none;">
+
+  <!-- Floating Toast Notification (FB_IMG_1792287876157) -->
+  <div class="admin-toast" id="adminToast">
+    <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
+    <span id="toastText">تم تحميل الملف! ضعه بجانب ملف المنيو للموافقة على التحديث.</span>
+  </div>
+
+  <div class="admin-wrapper">
+
+    <!-- Top Admin Header -->
+    <header class="admin-header">
+      <div class="admin-title-wrap">
+        <svg class="admin-pen-icon" viewBox="0 0 24 24">
+          <path d="M12 20h9"></path>
+          <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
+        </svg>
+        <h1 class="admin-title">لوحة تحكم الحصن والمنيو</h1>
+      </div>
+
+      <div class="admin-actions">
+        <!-- Import Button -->
+        <button type="button" class="btn-admin btn-import" id="btnImport">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+            <polyline points="17 8 12 3 7 8"></polyline>
+            <line x1="12" y1="3" x2="12" y2="15"></line>
+          </svg>
+          <span>استيراد ملف سابق</span>
+        </button>
+
+        <!-- Export & Save Button -->
+        <button type="button" class="btn-admin btn-export" id="btnExport">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path>
+            <polyline points="17 21 17 13 7 13 7 21"></polyline>
+            <polyline points="7 3 7 8 15 8"></polyline>
+          </svg>
+          <span>حفظ وتصدير المنيو</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- SECTION 1: Hotspot & Brand Settings -->
+    <div class="admin-card">
+      <h2 style="font-size: 1.25rem; font-weight: 800; color: var(--admin-primary); margin-bottom: 16px; border-bottom: 1px dashed var(--admin-border); padding-bottom: 8px;">
+        ⚙ إعدادات صفحة الهوتسبوت والكافيه
+      </h2>
+
+      <div class="settings-grid">
+        <div class="setting-field">
+          <label>اسم الكافيه / الشبكة:</label>
+          <input type="text" class="admin-input" id="setCafeName" placeholder="الحصن">
+        </div>
+
+        <div class="setting-field">
+          <label>نوع تسجيل الدخول:</label>
+          <select class="admin-input" id="setLoginMode">
+            <option value="username">اسم مستخدم فقط (رقم البطاقة فقط)</option>
+            <option value="both">اسم مستخدم وكلمة مرور</option>
+          </select>
+        </div>
+
+        <div class="setting-field">
+          <label>رمز العملة في الأسعار:</label>
+          <input type="text" class="admin-input" id="setCurrency" placeholder="₪ أو د.أ أو ر.س أو $">
+        </div>
+
+        <div class="setting-field">
+          <label>رقم الهاتف للاتصال:</label>
+          <input type="text" class="admin-input" id="setPhone" placeholder="+970 59 000 0000">
+        </div>
+
+        <div class="setting-field" style="grid-column: 1 / -1;">
+          <label>العنوان والموقع:</label>
+          <input type="text" class="admin-input" id="setAddress" placeholder="الرمال - شارع الشهداء - بالقرب من باندا مول">
+        </div>
+
+        <div class="setting-field" style="grid-column: 1 / -1;">
+          <label>نص الترحيب في صفحة الدخول:</label>
+          <input type="text" class="admin-input" id="setWelcomeText" placeholder="تفضل بتسجيل الدخول للوصول إلى شبكتنا الخاصة.">
+        </div>
+
+        <!-- Toggles -->
+        <div class="setting-toggle">
+          <div>
+            <div style="font-weight: 800;">إظهار زر الإنترنت المجاني</div>
+            <div style="font-size: 0.8rem; color: var(--admin-text-muted);">إظهار/إخفاء زر تجربة الإنترنت المجاني</div>
+          </div>
+          <label class="switch">
+            <input type="checkbox" id="toggleTrial">
+            <span class="slider"></span>
+          </label>
+        </div>
+
+        <div class="setting-toggle">
+          <div>
+            <div style="font-weight: 800;">إظهار كرت قائمة الكافيه</div>
+            <div style="font-size: 0.8rem; color: var(--admin-text-muted);">عرض كرت القائمة في صفحة تسجيل الدخول</div>
+          </div>
+          <label class="switch">
+            <input type="checkbox" id="toggleMenu">
+            <span class="slider"></span>
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 2: Menu Categories & Items Editor (FB_IMG_1792287861852) -->
+    <div class="admin-card">
+      <h2 style="font-size: 1.25rem; font-weight: 800; color: var(--admin-primary); margin-bottom: 16px;">
+        🍽 إدارة أقسام وقائمة الطعام والمشروبات
+      </h2>
+
+      <!-- Category Tabs -->
+      <div class="admin-tabs" id="categoryTabs"></div>
+
+      <!-- Category Info Topbar -->
+      <div class="category-topbar">
+        <button type="button" class="btn-delete-cat" id="btnDeleteCat">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="3 6 5 6 21 6"></polyline>
+            <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+          </svg>
+          <span>حذف الصفحة</span>
+        </button>
+
+        <div class="cat-input-group">
+          <label>معرف (ID):</label>
+          <input type="text" class="admin-input" id="catIdInput" placeholder="hot-drinks">
+        </div>
+
+        <div class="cat-input-group" style="flex: 2;">
+          <label>اسم الصفحة الرئيسية:</label>
+          <input type="text" class="admin-input" id="catMainNameInput" placeholder="المشروبات الساخنة">
+        </div>
+      </div>
+
+      <!-- Subcategories & Items Grid -->
+      <div class="subcats-grid" id="subcatsGrid">
+        <!-- Rendered by js/admin.js -->
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Delete Confirmation Modal (FB_IMG_1792287873614) -->
+  <div class="admin-modal-backdrop" id="confirmModal">
+    <div class="admin-modal-content">
+      <div class="modal-warning-icon">
+        <svg viewBox="0 0 24 24">
+          <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
+          <line x1="12" y1="9" x2="12" y2="13"></line>
+          <line x1="12" y1="17" x2="12.01" y2="17"></line>
+        </svg>
+      </div>
+
+      <h3 class="modal-title" id="modalTitle">تأكيد حذف القسم</h3>
+      <p class="modal-desc" id="modalDesc">
+        سيتم حذف قسم "الشاي" وجميع الأصناف الموجودة بداخله. هل أنت متأكد؟
+      </p>
+
+      <div class="modal-buttons">
+        <button type="button" class="btn-modal-confirm" id="btnModalConfirm">نعم، تأكيد الحذف</button>
+        <button type="button" class="btn-modal-cancel" id="btnModalCancel">إلغاء الأمر</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="config.js"></script>
+  <script src="js/admin.js"></script>
+</body>
+</html>
